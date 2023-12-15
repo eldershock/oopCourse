@@ -128,7 +128,7 @@ int main() {
 			}
 		}
 
-		//commit
+		//commit!
 
 		cout << "Выйти: (введите 1 или 0) ";
 		cin >> exit;
