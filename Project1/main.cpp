@@ -15,18 +15,7 @@ double& operator += (double& sum, YearReadings& ourObject) {
 int main() {
 	setlocale(LC_ALL, "Russian");
 
-	YearReadingsChild info{2023};
-	YearReadings infoTwo{2022};
-	vector <YearReadings> array;
-	/*array.push_back(info);
-	array.push_back(infoTwo);
-	int year = 2023;
-	array[0].setYear(year);
-	year -= 10;
-	array[1].setYear(year);
-	cout << array[0].getCurrentYear() << endl;
-	cout << array[1].getCurrentYear() << endl;
-	system("pause");*/
+	vector <YearReadings*> array;
 
 	int choice = 0;
 	int year = 0;
@@ -34,6 +23,7 @@ int main() {
 	int currentMonth = 0;
 	int payment = 0;
 	float tariff = 0;
+	int additionallyPayment = 0;
 
 	bool fillFlag = false;
 
@@ -44,7 +34,7 @@ int main() {
 			while (cin.get() != '\n');
 			cout << "Ошибка: введите число: ";
 		}
-		array.push_back(YearReadingsChild(year));
+		array.push_back(new YearReadingsChild(year));
 		cout << "Закончить? (введите 1 или 0) ";
 		cin >> fillFlag;
 	}
@@ -55,8 +45,8 @@ int main() {
 		int yearChoice = 0;
 		cout << "Выберите год: ";
 		cin >> yearChoice;
-		for (auto& arrayElement : array) {
-			if (arrayElement.getCurrentYear() == yearChoice) {
+		for (YearReadings* arrayElement : array) {
+			if (arrayElement->getCurrentYear() == yearChoice) {
 				do {
 					try {
 						//Выбрать элемент массива!
@@ -67,7 +57,7 @@ int main() {
 							cout << "Введите тариф: ";
 							//Проверка на ввод исключительно цифр
 							cin >> tariff;
-							arrayElement.setTariff(tariff);
+							arrayElement->setTariff(tariff);
 							cout << "Был установлен тариф: " << tariff << endl;
 							system("pause");
 							break;
@@ -77,25 +67,25 @@ int main() {
 							currentMonth = month;
 							cout << "Введите затраты: ";
 							cin >> payment;
-							arrayElement.paymentInputAndIndicationCount(month, payment);
+							arrayElement->paymentInputAndIndicationCount(month, payment);
 							system("pause");
 							break;
 						case 3:
-							arrayElement.indicationsOut();
+							arrayElement->indicationsOut();
 							system("pause");
 							break;
 						case 4:
-							arrayElement.finalSumCount();
-							cout << "Итоговая сумма платежей: " << arrayElement.getFinalSumOut() << endl;
+							arrayElement->finalSumCount();
+							cout << "Итоговая сумма платежей: " << arrayElement->getFinalSumOut() << endl;
 							system("pause");
 							break;
 						case 5:
-							arrayElement.averageConsumptionCount();
-							cout << "Средняя трата энергии: " << arrayElement.getAverageConsumption() << endl;
+							arrayElement->averageConsumptionCount();
+							cout << "Средняя трата энергии: " << arrayElement->getAverageConsumption() << endl;
 							system("pause");
 							break;
 						case 6:
-							cout << "Текущий год: " << arrayElement.getCurrentYear() << endl;
+							cout << "Текущий год: " << arrayElement->getCurrentYear() << endl;
 							system("pause");
 							break;
 						case 7:
@@ -104,11 +94,18 @@ int main() {
 							break;
 						case 8:
 							cin >> month;
-							info.getInfoByMonth(month, true);
+							arrayElement->getInfoByMonth(month, true);
 							system("pause");
 							break;
 						case 9:
-							cout << info;
+							cout << "Введите месяц: ";
+							cin >> month;
+							cout << "Введите дополнительный платёж: ";
+							cin >> additionallyPayment;
+							arrayElement->addAdditionallyPayment(month, additionallyPayment);
+							system("pause");
+							break;
+						case 10:
 							cout << "Bye" << endl;
 							exit = true;
 							system("pause");
@@ -124,7 +121,7 @@ int main() {
 						system("pause");
 						continue;
 					}
-				} while (choice != 9);
+				} while (choice != 10);
 			}
 		}
 

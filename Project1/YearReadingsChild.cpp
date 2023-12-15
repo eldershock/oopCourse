@@ -1,9 +1,9 @@
-
 #include "YearReadingsChild.h"
 
 void YearReadingsChild::addAdditionallyPayment(int& month, int& additionallyPayment) {
 	this->additionallyPayment[month - 1] = additionallyPayment;
 	payments[month - 1] += this->additionallyPayment[month - 1];
+	cout << payments[month - 1] << endl;
 	indications[month - 1] = payments[month - 1] * tariff;
 }
 

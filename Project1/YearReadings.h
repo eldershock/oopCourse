@@ -18,7 +18,7 @@ protected:
 	int finalSum = 0;
 	float averageConsumption = 0;
 	float tariff = 0;
-
+	int additionallyPayment = 0;
 	void checkYear();
 
 public:
@@ -49,4 +49,7 @@ public:
 	int getCurrentYear() const;
 	int getFinalSumOut() const;
 	float getAverageConsumption() const;
+
+	virtual void addAdditionallyPayment(int& month, int& additionallyPayment) {};
+	virtual void getInfoByMonth(int& month, bool getPaymentsInfo) const {};
 };
