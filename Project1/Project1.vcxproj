@@ -132,6 +132,8 @@
     <ClCompile Include="YearReadings.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IYearReadings.h" />
+    <ClInclude Include="TemplateClass.h" />
     <ClInclude Include="YearReadings.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="YearReadingsChild.h" />

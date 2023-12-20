@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include "YearReadingsChild.h"
+#include "TemplateClass.h"
 
 //Перегрузка операторов вне класса
 ostream& operator<<(ostream& stream, YearReadings& ourObject) {
@@ -16,6 +17,7 @@ int main() {
 	setlocale(LC_ALL, "Russian");
 
 	vector <YearReadings*> array;
+	TemplateClass<int> paymentsList;
 
 	int choice = 0;
 	int year = 0;
@@ -35,6 +37,7 @@ int main() {
 			cout << "Ошибка: введите число: ";
 		}
 		array.push_back(new YearReadingsChild(year));
+		paymentsList.addNewYearAccounting(year);
 		cout << "Закончить? (введите 1 или 0) ";
 		cin >> fillFlag;
 	}
@@ -68,6 +71,7 @@ int main() {
 							cout << "Введите затраты: ";
 							cin >> payment;
 							arrayElement->paymentInputAndIndicationCount(month, payment);
+							paymentsList.addPaymentInAccounting(year, month, payment);
 							system("pause");
 							break;
 						case 3:
@@ -102,12 +106,16 @@ int main() {
 							cin >> month;
 							cout << "Введите дополнительный платёж: ";
 							cin >> additionallyPayment;
-							arrayElement->addAdditionallyPayment(month, additionallyPayment);
+							((IYearReadings*)arrayElement)->addAdditionallyPayment(month, additionallyPayment);
 							system("pause");
 							break;
 						case 10:
 							cout << "Bye" << endl;
 							exit = true;
+							system("pause");
+							break;
+						case 11:
+							paymentsList.getList(year);
 							system("pause");
 							break;
 						default:

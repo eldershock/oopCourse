@@ -2,10 +2,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "IYearReadings.h"
 
 using namespace std;
 
-class YearReadings {
+class YearReadings : public IYearReadings {
 
 static const int yearLen = 12;
 static const int wrongValue = -1;
@@ -50,6 +51,6 @@ public:
 	int getFinalSumOut() const;
 	float getAverageConsumption() const;
 
-	virtual void addAdditionallyPayment(int& month, int& additionallyPayment) {};
-	virtual void getInfoByMonth(int& month, bool getPaymentsInfo) const {};
+	void addAdditionallyPayment(int& month, int& additionallyPayment) override {};
+	void getInfoByMonth(int& month, bool getPaymentsInfo) const override {};
 };
